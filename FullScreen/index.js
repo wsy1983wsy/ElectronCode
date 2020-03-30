@@ -4,19 +4,18 @@ function createWindow() {
     //BrowserWindow代表一个window，
     //如果fullscreen为true，则系统会忽略width，height,x,y这些属性，仍然全屏显示
     let win = new BrowserWindow({
-        fullscreen: true,
+        // fullscreen: true,
         width: 200,
         height: 200,
-        x: 200,
-        y: 200,
-        maxWidth: 600,
-        maxHeight: 600,
         webPreferences: {
             nodeIntegration: true
         }
     })
     //加载index.html
     win.loadFile('index.html')
+    win.setFullScreen(true)
+    //通过isFullScreen可以获取是否为全屏
+    console.log(win.isFullScreen())
     win.on("close", () => {
         console.log('closed')
         win = null
