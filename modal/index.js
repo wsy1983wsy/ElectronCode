@@ -1,10 +1,9 @@
 const { app, BrowserWindow } = require('electron')
 /**
- * 父子窗口
- * 1.子窗口总是在父窗口上面
- * 2.如果父窗口关闭，子窗口自动关闭
- * 3.子窗口相当于父窗口的悬浮窗口
- * Mac os x 和windows 区别在于，Mac os x 中移动父窗口，子窗口跟随移动，windows下不会移动
+ * 模态窗口，指禁用父窗口的子窗口，也就是说，处于模态的子窗口显示后，无法使用父窗口，直到子窗口关闭
+ * 1.模态窗口需要是另一个窗口的子窗口
+ * 2.一旦模态窗口显示，父窗口将无法显示
+ * modal=true
  */
 function createWindow() {
     //创建父窗口
@@ -17,6 +16,7 @@ function createWindow() {
         parent: parent,
         width: 200,
         height: 200,
+        modal: true,
         webPreferences: {
             nodeIntegration: true
         }
