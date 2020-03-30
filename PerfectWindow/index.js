@@ -1,25 +1,35 @@
-const { app, BrowserWindow } = require('./node_modules/electron')
-
+const { app, BrowserWindow } = require('electron')
+/**
+ * 优雅的加载页面
+ * show,是否显示页面
+ * 1.创建一个隐藏的window
+ * 2.加载页面
+ * 3.将ready-to-show事件绑定到页面
+ * 4.在ready-to-show事件中，显示页面
+ */
 function createWindow() {
-    //BrowserWindow代表一个window，
-    //如果fullscreen为true，则系统会忽略width，height,x,y这些属性，仍然全屏显示
+    //创建一个页面，设置show为false
     let win = new BrowserWindow({
-        // fullscreen: true,
-        width: 200,
-        height: 200,
+        width: 800,
+        height: 600,
+        show: false,
         webPreferences: {
             nodeIntegration: true
         }
     })
     //加载index.html
     win.loadFile('index.html')
-    win.setFullScreen(true)
-    //通过isFullScreen可以获取是否为全屏
-    console.log(win.isFullScreen())
+    //当页面加载完成后，调用show方法
+    win.on('ready-to-show', () => {
+        win.show()
+    })
     win.on("close", () => {
         console.log('closed')
         win = null
     })
+
+    // 打开开发者工具
+    win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
