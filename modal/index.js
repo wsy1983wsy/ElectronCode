@@ -4,6 +4,13 @@ const { app, BrowserWindow } = require('electron')
  * 1.模态窗口需要是另一个窗口的子窗口
  * 2.一旦模态窗口显示，父窗口将无法显示
  * modal=true
+ * 主要用于设置，输入框，打开对话框之类的场景
+ * mac 下：
+ *      会隐藏模态窗口的标题栏，只能通过close方法关闭模态子窗口
+ *      父窗口仍然可以拖动，但无法关闭
+ * windows 下：
+ *      模态窗口仍然会显示菜单和标题栏
+ *      父窗口无法拖动
  */
 function createWindow() {
     //创建父窗口
