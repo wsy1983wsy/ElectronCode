@@ -1,17 +1,25 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow } = require('./node_modules/electron')
 
 function createWindow() {
+    //BrowserWindow代表一个window，
+    //如果fullscreen为true，则系统会忽略width，height,x,y这些属性，仍然全屏显示
     let win = new BrowserWindow({
-        frame:false,
-        transparent:true
+        // fullscreen: true,
+        width: 200,
+        height: 200,
+        webPreferences: {
+            nodeIntegration: true
+        }
     })
     //加载index.html
     win.loadFile('index.html')
+    win.setFullScreen(true)
+    //通过isFullScreen可以获取是否为全屏
+    console.log(win.isFullScreen())
     win.on("close", () => {
         console.log('closed')
         win = null
     })
-    win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

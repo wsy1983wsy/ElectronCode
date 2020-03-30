@@ -1,9 +1,16 @@
 const { app, BrowserWindow } = require('electron')
-
+/**
+ * mac os 设置kiosk为true，自动全屏，去掉kiosk，则全屏退出
+ */
 function createWindow() {
+    //frame 设置边框
+    //transparent 设置透明
     let win = new BrowserWindow({
-        frame:false,
-        transparent:true
+        //锁定界面
+        kiosk: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
     })
     //加载index.html
     win.loadFile('index.html')
