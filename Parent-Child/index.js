@@ -1,29 +1,35 @@
 const { app, BrowserWindow } = require('electron')
-
+/**
+ * 父子窗口
+ * 1.子窗口总是在父窗口上面
+ * 2.如果父窗口关闭，子窗口自动关闭
+ * 3.子窗口相当于父窗口的悬浮窗口
+ */
 function createWindow() {
-    //BrowserWindow代表一个window，
-    let win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        minWidth: 400,
-        minHeight: 300,
-        maxWidth: 1200,
-        maxHeight: 900,
-        x: 200,
-        y: 200,
+    //创建父窗口
+    let parent = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+    let child = new BrowserWindow({
+        parent: parent,
+        width: 200,
+        height: 200,
         webPreferences: {
             nodeIntegration: true
         }
     })
     //加载index.html
-    win.loadFile('index.html')
-    win.on("close", () => {
+    parent.loadFile('index.html')
+    child.loadFile('child.html')
+    parent.on("close", () => {
         console.log('closed')
-        win = null
+        parent = null
     })
 
     // 打开开发者工具
-    win.webContents.openDevTools()
+    parent.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
