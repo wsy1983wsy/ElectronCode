@@ -1,13 +1,15 @@
 const { app, BrowserWindow } = require('electron')
 /**
- * mac os 设置kiosk为true，自动全屏，去掉kiosk，则全屏退出
+ * mac os下设置图标不会显示，只有windows和linux会显示
  */
 function createWindow() {
     //frame 设置边框
     //transparent 设置透明
     let win = new BrowserWindow({
         //锁定界面
-        kiosk: false,
+        width: 400,
+        height: 400,
+        icon: '../../images/folder.png',
         webPreferences: {
             nodeIntegration: true
         }
@@ -31,6 +33,7 @@ app.on('window-all-closed', () => {
     console.log('all window closed')
     // 在 macOS 上，除非用户用 Cmd + Q 确定地退出，
     // 否则绝大部分应用及其菜单栏会保持激活。
+    //判断是否为苹果系统
     if (process.platform !== 'darwin') {
         app.quit()
     }

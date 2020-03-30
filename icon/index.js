@@ -1,8 +1,6 @@
-const { app, BrowserWindow } = require('./node_modules/electron')
+const { app, BrowserWindow } = require('electron')
 
 function createWindow() {
-    //frame 设置边框
-    //transparent 设置透明
     let win = new BrowserWindow({
         frame:false,
         transparent:true
@@ -13,6 +11,7 @@ function createWindow() {
         console.log('closed')
         win = null
     })
+    win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
