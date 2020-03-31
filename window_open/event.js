@@ -29,6 +29,11 @@ const ipcMain = remote.ipcMain
  * 从子窗口返回数据
  * ipcRenderer.send(...)
  * ipcMain.on
+ * 
+ * 页面来源：谁使用url打开的新的子窗口，在本例中，谁是指index.html所在的路径
+ * 
+ * eval向子窗口传递数据
+ * eval方法用来执行javascript代码
  */
 
 ipcMain.on('close', (event, str) => {
@@ -36,7 +41,7 @@ ipcMain.on('close', (event, str) => {
 })
 
 function windowOpen() {
-    win = window.open('./other.html', '子窗口', 'width=100,height=100')
+    win = window.open('./other.html', '子窗口', 'width=400,height=400')
 }
 //获取焦点
 function focusWindow() {
@@ -77,6 +82,7 @@ function sendDataToChild() {
 function onLoad() {
     window.addEventListener('message', function (e) {
         data.innerText = e.data.name
+        alert(e.origin)
     })
 }
 
@@ -84,4 +90,10 @@ function closeSubWindow() {
     const win = remote.getCurrentWindow()
     ipcRenderer.send('close', '窗口已经关闭')
     win.close()
+}
+
+function evalSendData() {
+    if (win != undefined) {
+        win.eval('data.innerText = "' + data.value + '"')
+    }
 }
