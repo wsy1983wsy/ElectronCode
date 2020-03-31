@@ -8,9 +8,10 @@ const { app, BrowserWindow } = require('electron')
  *  title: string 对话框的标题（适用于windows)
  *  defaultPath：string 默认的路径
  *  buttonlabel：string 按钮文本（mac 右侧，windows 左侧）
- * filters:Array 用于过滤指定类型的文件
- * properties,Array 包含对话框的功能，如果打开文件，打开目录，多选等
- * message string 对话框标题（mac）
+ *  filters:Array 用于过滤指定类型的文件
+ *  properties,Array 包含对话框的功能，如果打开文件，打开目录，多选等
+ *  message string 对话框标题（mac）
+ *  
  */
 function createWindow() {
     //BrowserWindow代表一个window，
