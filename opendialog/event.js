@@ -66,15 +66,21 @@ function multiSelection() {
     const options = {}
     options.title = '打开目录' //设置windows标题
     options.message = '打开目录' //设置Mac的标题
-    options.properties = ['openFile', 'openDirectory', 'createDirectory','multiSelections']
+    options.properties = ['openFile', 'openDirectory', 'createDirectory', 'multiSelections']
     options.buttonLabel = '选择'
-    options.filters = [
-        { name: '图像文件', extensions: ['jpg', 'jpeg', 'gif'] },
-        { name: '视频文件', extensions: ['mkv', 'avi', 'mp4'] },
-        { name: '所有文件(*)', extensions: ['*'] }
-    ]
     dialog.showOpenDialog(options)
         .then(result => {
             label.innerText = result.filePaths
         })
+}
+
+//同步获取结果
+function syncGetResult() {
+    const label = document.getElementById('label')
+    const options = {}
+    options.title = '打开目录' //设置windows标题
+    options.message = '打开目录' //设置Mac的标题
+    options.properties = ['openFile', 'openDirectory', 'createDirectory', 'multiSelections']
+    options.buttonLabel = '选择'
+    label.innerText = dialog.showOpenDialogSync(options)
 }
