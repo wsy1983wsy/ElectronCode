@@ -1,4 +1,6 @@
-const remote = require('electron').remote;
+const { remote, ipcRenderer } = require('electron');
+const ipcMain = remote.ipcMain
+
 
 /**
  * 使用HTML5 API创建子窗口
@@ -23,7 +25,15 @@ const remote = require('electron').remote;
  * 
  * 窗口之间的交互：最简单的数据方式
  * postMessage(data,'*')
+ * 
+ * 从子窗口返回数据
+ * ipcRenderer.send(...)
+ * ipcMain.on
  */
+
+ipcMain.on('close', (event, str) => {
+    alert(str)
+})
 
 function windowOpen() {
     win = window.open('./other.html', '子窗口', 'width=100,height=100')
@@ -51,8 +61,27 @@ function closeWindow() {
     }
 }
 //显示打印对话框
-function printWindow(){
-    if(win != undefined){
+function printWindow() {
+    if (win != undefined) {
         win.print()
     }
+}
+
+function sendDataToChild() {
+    if (win != undefined) {
+        // win.postMessage(data.value, '*')
+        win.postMessage({ name: data.value }, '*')
+    }
+}
+
+function onLoad() {
+    window.addEventListener('message', function (e) {
+        data.innerText = e.data.name
+    })
+}
+
+function closeSubWindow() {
+    const win = remote.getCurrentWindow()
+    ipcRenderer.send('close', '窗口已经关闭')
+    win.close()
 }
