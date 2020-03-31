@@ -84,3 +84,4 @@ function syncGetResult() {
     options.buttonLabel = '选择'
     label.innerText = dialog.showOpenDialogSync(options)
 }
+
