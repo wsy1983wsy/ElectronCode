@@ -12,6 +12,16 @@ const { app, BrowserWindow } = require('electron')
  *  properties,Array 包含对话框的功能，如果打开文件，打开目录，多选等
  *  message string 对话框标题（mac）
  *  
+ * openFile,
+ * openDirectory, 
+ * 
+ * multiSelections 选择多个文件或目录
+ *      如果同时选择多个文件或目录，Mac和windows的设置方法不同
+ * 
+ *      Mac 如果想同时选择多个文件和目录，需要指定openFile和openDirectory
+ *      Windows 只需要指定openFile，就可以选择文件和目录
+ * 
+ * 如果在Windows下指定了openDirectory，不管是否指定openFile，都只能选择目录
  */
 function createWindow() {
     //BrowserWindow代表一个window，
