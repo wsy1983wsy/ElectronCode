@@ -19,10 +19,56 @@ function createWindow() {
     //定义菜单模板
     const menuTemplate = [
         {
-            label: '文件', submenu: []
+            label: '文件', submenu: [
+                {
+                    label: '关于',
+                    // role: 'about', //只有mac 有用
+                    click: () => {
+                        var aboutWin = new BrowserWindow({
+                            width: 300,
+                            height: 300
+                        })
+                        aboutWin.loadURL('https://www.baidu.com')
+                    }
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label: '关闭',
+                    accelerator: 'Command+Q',
+                    click: () => { win.close() }
+                }
+            ]
         },
         {
-            label: '编辑', submenu: []
+            label: '编辑', submenu: [
+                {
+                    label: '复制',
+                    accelerator: 'Command+C',
+                    click: () => {
+                        win.webContents.insertText('复制')
+                    }
+                },
+
+                {
+                    label: '剪切',
+                    accelerator: 'Command+X',
+                    click: () => {
+                        win.webContents.insertText('复制')
+                    }
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label: '查找',
+                    accelerator: 'Command+F',
+                    click: () => {
+                        win.webContents.insertText('复制')
+                    }
+                }
+            ]
         }
     ]
     const menu = Menu.buildFromTemplate(menuTemplate)
