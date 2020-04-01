@@ -10,7 +10,7 @@ const Tray = electron.Tray
 let tray
 let contextMenu
 
-function createWindow() {
+function createWindow(role = 'paste') {
     //BrowserWindow代表一个window，
     let win = new BrowserWindow({
         width: 800,
@@ -26,7 +26,7 @@ function createWindow() {
     tray = new Tray('../images/open.png')
     //为托盘图标添加上下文菜单
     contextMenu = Menu.buildFromTemplate([
-        {label: '复制', role: 'copy'}, {label: '粘贴', role: 'paste'}
+        {label: '复制', role: 'copy'}, {label: '粘贴', role: role}
     ])
     tray.setToolTip('这是一个托盘应用')
     tray.setContextMenu(contextMenu)
