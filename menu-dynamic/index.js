@@ -4,17 +4,7 @@ const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
 
 /*
-菜单类型:
-1.norma 默认的菜单类型
-2.separator:分割线
-3.submenu 子菜单
-4.checkbox 多选材单
-5.radio 单选菜单
-
-图标：
-    window 使用ico
-    其他系统使用png
-按照图片的原始尺寸显示,一般为16x16
+动态菜单
 */
 
 function createWindow() {
@@ -29,28 +19,6 @@ function createWindow() {
     })
     //加载index.html
     win.loadFile('index.html')
-    let icon = ''
-    if (process.platform == 'win32') {
-        icon = '../images/folder.ico'
-    } else {
-        icon = '../images/open.png'
-    }
-    //定义菜单模板
-    const menuTemplate = [{
-        label: '文件',
-        submenu: [
-            {
-                label: '打开',
-                icon: icon
-            },
-            {
-                label: '重做',
-                role: 'redo'
-            }
-        ]
-    }];
-    const menu = Menu.buildFromTemplate(menuTemplate)
-    Menu.setApplicationMenu(menu)
     win.on("close", () => {
         console.log('closed')
         win = null
