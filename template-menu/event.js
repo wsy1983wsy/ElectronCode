@@ -1,15 +1,3 @@
-/*
-菜单
-1.应用菜单（窗口菜单）
-    windows linux 和mac os（所有的应用共享）
-2.上下文菜单
-
-
-菜单实现方式
-1.模板
-
-2.代码
-*/
 
 const electron = require('electron');
 const remote = electron.remote;
